@@ -77,7 +77,7 @@ elif choice == 1:
 
     ethval = 2300
     while cont == True:
-        rand = random.randint(0,50)
+        rand = random.randint(0,500)
         if rand != 1:
             print((Colorate.Color(Colors.red,f"[-] 0x{secrets.token_hex(22)} || 00.00 ETH [$00.00]")))
             fail +=1
