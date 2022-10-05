@@ -1,5 +1,4 @@
 import os, time, secrets, random
-from tqdm import tqdm
 from pystyle import *
 
 banner = Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"""
