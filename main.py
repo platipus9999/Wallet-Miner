@@ -34,7 +34,6 @@ num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 hit=0
 fail=0
 os.system('cls' if os.name == 'nt' else 'clear')
-os.system("&title Wallet Miner / Made By PLATIPUS#2535 Fail [/] Hit [/]")
 
 
  
@@ -79,13 +78,9 @@ elif choice == 1:
         rand = random.randint(0,500)
         if rand != 1:
             print((Colorate.Color(Colors.red,f"[-] 0x{secrets.token_hex(22)} || 00.00 ETH [$00.00]")))
-            fail +=1
-            os.system(f"title Wallet Miner / Made By PLATIPUS#2535 Fail [{fail}] Hit [{hit}]")
 
         else:
             eth = random.randint(1,50) /100
-            hit +=1
-            os.system(f"title Wallet Miner / Made By PLATIPUS#2535 Fail [{fail}] Hit [{hit}]")
             print((Colorate.Horizontal(Colors.green_to_cyan,f"[+] 0x{secrets.token_hex(22)} || 0{eth} ETH [${eth * ethval}]")))
             ques = input("[/] Would you like to continue [y/n] > ")
             time.sleep(random.uniform(1.5, 3))
@@ -126,13 +121,9 @@ elif choice == 2:
         rand = random.randint(0,500000)
         if rand != 1:
             print((Colorate.Color(Colors.red,f"[-] {random.choice(num)}x{secrets.token_hex(22)} || 00.00 BTC [$00.00]")))
-            fail +=1
-            os.system(f"title Wallet Miner / Made By PLATIPUS#2535 Fail [{fail}] Hit [{hit}]")
                 
         else:
             eth = random.randint(1,50) /100
-            hit +=1
-            os.system(f"title Wallet Miner / Made By PLATIPUS#2535 Fail [{fail}] Hit [{hit}]")
             print((Colorate.Horizontal(Colors.green_to_cyan,f"[+] {random.choice(num)}x{secrets.token_hex(22)} || 0{eth} BTC [${eth * ethval}]")))
             ques = input("[/] Would you like to continue [y/n] > ")
             time.sleep(random.uniform(1.5, 3))
