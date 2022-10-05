@@ -80,7 +80,7 @@ elif choice == 1:
             print((Colorate.Color(Colors.red,f"[-] 0x{secrets.token_hex(22)} || 00.00 ETH [$00.00]")))
 
         else:
-            eth = random.randint(1,50) /100
+            eth = random.randint(1,5000) /100
             print((Colorate.Horizontal(Colors.green_to_cyan,f"[+] 0x{secrets.token_hex(22)} || 0{eth} ETH [${eth * ethval}]")))
             ques = input("[/] Would you like to continue [y/n] > ")
             time.sleep(random.uniform(1.5, 3))
