@@ -33,15 +33,15 @@ banner1 = Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"""
 num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 hit=0
 fail=0
-
-os.system("cls&&title Wallet Miner / Made By PLATIPUS#2535 Fail [/] Hit [/]")
+os.system('cls' if os.name == 'nt' else 'clear')
+os.system("&title Wallet Miner / Made By PLATIPUS#2535 Fail [/] Hit [/]")
 
 
  
 choice = int(input(banner1+" "))
 
 if choice not in [1,2]:
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     input(banner + "\nAre you Dumb ? ")
 
 elif choice == 1:
@@ -68,7 +68,7 @@ elif choice == 1:
 
     time.sleep(random.uniform(1, 3))
 
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(banner)
     time.sleep(random.uniform(2, 4))
 
@@ -116,7 +116,7 @@ elif choice == 2:
 
     time.sleep(random.uniform(1, 3))
 
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(banner)
     time.sleep(random.uniform(2, 4))
     cont = True
