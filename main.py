@@ -1,5 +1,12 @@
-import os, time, secrets, random
+import os, time, secrets
 from pystyle import *
+import requests
+from requests.structures import CaseInsensitiveDict
+from bs4 import BeautifulSoup
+import time
+import os
+import threading
+import random
 
 banner = Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"""
 ╔═════════════════════════════════════════════╗
@@ -10,122 +17,64 @@ banner = Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"""
 ║   ██║ ╚═╝ ██║██║██║ ╚████║███████╗██║  ██║  ║
 ║   ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝  ║          
 ╠═════════════════════════════════════════════╣
-║  Made by PLATIPUS#2535 -> [Just for fun]    ║
+║  Made by PLATIPUS#2535 and Feuerwerko#2840  ║
 ╚═════════════════════════════════════════════╝"""))
 
-banner1 = Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"""
-╔═════════════════════════════════════════════╗
-║   ███╗   ███╗██╗███╗   ██╗███████╗██████╗   ║
-║   ████╗ ████║██║████╗  ██║██╔════╝██╔══██╗  ║
-║   ██╔████╔██║██║██╔██╗ ██║█████╗  ██████╔╝  ║
-║   ██║╚██╔╝██║██║██║╚██╗██║██╔══╝  ██╔══██╗  ║
-║   ██║ ╚═╝ ██║██║██║ ╚████║███████╗██║  ██║  ║
-║   ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝  ║          
-╠═════════════════════════════════════════════╣
-║  Made by PLATIPUS#2535 -> [Just for fun]    ║
-╚═════════════════════════════════════════════╝  
 
-[1] ETH Wallet Miner
-[2] BTC Wallet Miner
+threads = 0
+checked = 0
 
-> """))
+try:
+    threads = int(input("How many threads do you want to use?: "))
+except Exception:
+    print("Invalid answer. Try again.")
+    try:
+        threads = int(input("How many threads do you want to use?: "))
+    except Exception:
+        print("Invalid answer. Using 1 thread.")
+        threads = 1
 
-num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-hit=0
-fail=0
-os.system('cls' if os.name == 'nt' else 'clear')
+url = "https://www.bitcoinlist.io/random"
+proxie_type = "socks5"
+print("reading proxies")
+proxies = open("proxies.txt").read().splitlines()
+print("done reading proxies")
 
 
- 
-choice = int(input(banner1+" "))
+def process():
+    global checked
 
-if choice not in [1,2]:
-    os.system('cls' if os.name == 'nt' else 'clear')
-    input(banner + "\nAre you Dumb ? ")
+    while True:
+        os.system(f"title Bye Bye Bitcoin // Checked Wallets: {checked} // by clout")
+        headers = CaseInsensitiveDict()
+        headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36"
+        req = requests.get(url, headers=headers, proxies={f"{proxie_type}": f'{proxie_type}://' + random.choice(proxies)})
+        soup = BeautifulSoup(req.content, 'html.parser')
+        wallets = soup.find_all("tr")
+        for wallet in wallets:
+            getwallet = str(wallet.getText()).strip()
+            privkey = getwallet.split()[0].strip()
+            uncompaddy = getwallet.split()[1].strip()
+            compaddy = getwallet.split()[2].strip()
+            balance = getwallet.split()[3].strip()
+            if "Private Key" in getwallet:
+                pass
+            else:
+                checked += 1
+                if float(balance) > 0:              
+                    open('hits.txt', 'a+').write(f"{balance} BTC found in Adress: {compaddy} // Private Key: {privkey}")
+                os.system("cls")
+                os.system(f"title Bye Bye Bitcoin // Checked Wallets: {checked} // by clout")
+                print(f"""
+              Private Key: {privkey}
+              Uncompressed Address: {uncompaddy}
+              Compressed Address: {compaddy}
+              Balance: {balance}
+""")
+            time.sleep(0.5)
 
-elif choice == 1:
-    input(Center.XCenter(Colorate.Horizontal(Colors.purple_to_blue,"\nETH Wallet > ")))
-    time.sleep(random.uniform(1, 3))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,f"\n\n[Connecting to eu-pub0{random.choice(num)}]\n")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
 
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Loading Wallet List]\n")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
-
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Matching Hash]")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
-
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Importing Proxies]")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
-
-    time.sleep(random.uniform(1, 3))
-
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(banner)
-    time.sleep(random.uniform(2, 4))
-
-    cont = True
-
-    ethval = 2300
-    while cont == True:
-        rand = random.randint(0,50000)
-        if rand != 1:
-            print((Colorate.Color(Colors.red,f"[-] 0x{secrets.token_hex(22)} || 00.00 ETH [$00.00]")))
-
-        else:
-            eth = random.randint(1,50) /100
-            print((Colorate.Horizontal(Colors.green_to_cyan,f"[+] 0x{secrets.token_hex(22)} || 0{eth} ETH [${eth * ethval}]")))
-            ques = input("[/] Would you like to continue [y/n] > ")
-            time.sleep(random.uniform(1.5, 3))
-            if ques.lower() not in ["y"]:
-                cont = False
-
-elif choice == 2:
-    input(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"\nBTC Wallet > ")))
-    time.sleep(random.uniform(1, 3))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,f"\n\n[Connecting to eu-pub0{random.choice(num)}]\n")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
-
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Loading Wallet List]\n")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
-
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Matching Hash]")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
-
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Importing Proxies]")))
-    time.sleep(random.uniform(1, 1.5))
-    print(Center.XCenter(Colorate.Vertical(Colors.purple_to_blue,"[Done!]\n\n")))
-
-    time.sleep(random.uniform(1, 3))
-
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(banner)
-    time.sleep(random.uniform(2, 4))
-    cont = True
-
-    ethval = 13000
-    while cont == True:
-        rand = random.randint(0,500000)
-        if rand != 1:
-            print((Colorate.Color(Colors.red,f"[-] {random.choice(num)}x{secrets.token_hex(22)} || 00.00 BTC [$00.00]")))
-                
-        else:
-            eth = random.randint(1,50) /100
-            print((Colorate.Horizontal(Colors.green_to_cyan,f"[+] {random.choice(num)}x{secrets.token_hex(22)} || 0{eth} BTC [${eth * ethval}]")))
-            ques = input("[/] Would you like to continue [y/n] > ")
-            time.sleep(random.uniform(1.5, 3))
-            if ques.lower() not in ["y"]:
-                cont = False
+if __name__ == "__main__":
+    for _ in range(threads):
+        x = threading.Thread(target=process)
+        x.start()
